@@ -3,12 +3,12 @@ import { cn } from "@/lib/utils";
 import { BarChart2, CheckSquare, Home, LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useLogout } from "@/hooks/useLogout";
-import { useNavigate } from "react-router-dom"; // 👈 IMPORTANTE
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
   const handleLogout = useLogout();
-  const navigate = useNavigate(); // 👈 HOOK DO REACT ROUTER
+  const navigate = useNavigate(); 
 
   return (
     <aside

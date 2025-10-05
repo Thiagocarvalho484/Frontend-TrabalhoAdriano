@@ -4,33 +4,20 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MailOpen } from "lucide-react";
-import Swal from "sweetalert2";
+import { useAlertSuccess } from "@/hooks/useSuccess";
+
 
 export default function RecoverPassword() {
   const [email, setEmail] = useState("");
+  const { alertSuccessRequestPassword } = useAlertSuccess()
   const [errors, setErrors] = useState<{ email?: string }>({});
   const navigate = useNavigate();
 
   const handleRecover = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({})
 
-    // Validação simples
-    const newErrors: { email?: string } = {};
-    if (!email.trim()) newErrors.email = "Campo obrigatório";
-    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email inválido";
-
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length > 0) return;
-
-    Swal.fire({
-      icon: "success",
-      title: "Email enviado!",
-      text: "Verifique sua caixa de entrada para redefinir sua senha.",
-      showConfirmButton: false,
-      timer: 2000
-    }).then(() => {
-      navigate("/step1")
-    })
+    alertSuccessRequestPassword()
   };
 
   return (
