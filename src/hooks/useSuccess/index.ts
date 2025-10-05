@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-
 import { useNavigate } from "react-router-dom";
 
 export function useAlertSuccess() {
@@ -18,7 +17,7 @@ export function useAlertSuccess() {
   function alertSuccessLogin() {
     Swal.fire({
       icon: "success",
-      title: "Login realizado com sucesso!",
+      title: "Login realizado com sucesso! ",
       text: "Redirecionando!",
       showConfirmButton: false,
       timer: 2000,
@@ -30,13 +29,36 @@ export function useAlertSuccess() {
   function alertSuccessRecoverPassword() {
     Swal.fire({
       icon: "success",
-      title: "Senha recuperada com sucesso!",
-      text: "Redirecionando para login...",
+      title: "Link de recuperação enviado! ",
+      text: "Verifique sua caixa de entrada e siga as instruções.",
       showConfirmButton: false,
-      timer: 2000,
+      timer: 3000, 
+    }).then(() => navigate("/login"));
+  }
+
+  function useLogout(){
+    Swal.fire({
+      title: "Tem certeza?",
+      text: "Você será deslogado do sistema.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, sair",
+      cancelButtonText: "Cancelar",
+    }).then(() => navigate("/login"));
+  }
+
+  function useVerifyEmail (){
+    Swal.fire({
+      icon: "success",
+      title: "E-mail verificado! ",
+      text: "Sua conta está ativa. Redirecionando para login...",
+      showConfirmButton: false,
+      timer: 3000,
     }).then(() => navigate("/login"));
   }
 
 
-  return { alertSuccessRegister, alertSuccessLogin, alertSuccessRecoverPassword};
+  return { alertSuccessRegister, alertSuccessLogin, alertSuccessRecoverPassword, useLogout, useVerifyEmail };
 }

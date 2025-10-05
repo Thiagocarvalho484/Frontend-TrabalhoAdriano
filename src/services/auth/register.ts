@@ -1,12 +1,11 @@
 import api from "../api";
-
 import type { User } from "@/@types/user";
 
-type RegisterData = {
+export type RegisterData = {
   name: string,
   email: string,
-  password: string
-  // confirmPassword: string
+  password: string,
+  confirmPassword: string
 }
 
 interface RegisterProps {
@@ -20,5 +19,6 @@ interface RegisterReturn {
 
 export const register = async ({ data }: RegisterProps): Promise<RegisterReturn> => {
   const { data: response } = await api.post('/auth/register', data);
+  
   return response;
 }
